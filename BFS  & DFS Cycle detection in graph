@@ -1,3 +1,8 @@
+Just Use stack in DFS nothing else
+
+
+
+// Using DFS
 queue<int> q2;
 
 bool BFS_cycleSolver(vector<vector<int>>& g,vector<int>& vis,int node,vector<int> previous_node_of)
