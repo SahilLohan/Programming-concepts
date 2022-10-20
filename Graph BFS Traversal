@@ -1,0 +1,40 @@
+queue<int> q;
+
+void BFS(vector<vector<int>>& g,vector<int>& vis,int node)
+{
+    q.push(node);
+    vis[node]=1;
+    while(!q.empty())
+    {
+        for(auto adjacent_node:g[node])
+        {
+            if(!vis[adjacent_node])
+            {
+                q.push(adjacent_node);
+                vis[adjacent_node]=1;
+            }
+        }
+        
+        node=q.front();
+        q.pop();
+        
+        cout<<node<<" ";
+        
+    }
+}
+
+void printByBFS(vector<vector<int>>& g)              // call this method (for 1 based index graph
+{
+    vector<int> vis(g.size(),0);
+    vis[0]=1;
+    
+    for(int i=1;i<g.size();i++)
+    {
+        if(!vis[i])
+        {
+            BFS(g,vis,i);
+        }
+    }
+    
+    cout << endl;
+}
