@@ -1,0 +1,54 @@
+queue<int> q2;
+
+bool BFS_cycleSolver(vector<vector<int>>& g,vector<int>& vis,int node,vector<int> previous_node_of)
+{
+    q2.push(node);
+    vis[node]=1;
+    while(!q2.empty())
+    {
+        for(auto adjacent_node:g[node])
+        {
+            
+            if(!vis[adjacent_node])
+            {
+                q2.push(adjacent_node);
+                vis[adjacent_node]=1;
+                previous_node_of[adjacent_node]=node;
+            }
+            else
+            {
+                if(previous_node_of[adjacent_node]!=node)
+                while(!q2.empty())
+                {
+                    q2.pop();
+                }
+                return true;
+            }
+        }
+        
+        node=q2.front();
+        q2.pop();
+        
+        cout<<node<<" ";
+        
+    }
+    return false;
+}
+
+
+bool cycleByBFS(vector<vector<int>>& g)                 // call this function ( for 1 based indexing)
+{
+    vector<int> vis(g.size(),0);
+    vector<int> previous_node_of(g.size(),-1);
+    vis[0]=1;
+    
+    for(int i=1;i<g.size();i++)
+    {
+        if(!vis[i])
+        {
+            if(BFS_cycleSolver(g,vis,i,previous_node_of))
+            return true;
+        }
+    }
+    return false;
+}
